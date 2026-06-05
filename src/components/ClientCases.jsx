@@ -36,9 +36,44 @@ const cases = [
   },
 ];
 
+function InnerCarousel({ images, title }) {
+  const { index, next, prev } = useCarousel({
+    totalSlides: images.length,
+    slidesToShow: 1,
+    loop: true,
+    autoplay: images.length > 1,
+    interval: 4000,
+  });
+  if (images.length <= 1) {
+    return (
+      <img width="640" height="490" src={images[0]} alt={title} style={{ width: '100%', height: 'auto' }} />
+    );
+  }
+  return (
+    <div className="case-inner-carousel carousel slick-initialized slick-slider slick-dotted">
+      <div className="slick-list draggable">
+        <div className="slick-track" style={{ width: `${images.length * 100}%` }}>
+          {images.map((img, j) => (
+            <div key={j} className={`slick-slide${j === index ? ' slick-current slick-active' : ''}`} style={{ width: `${100 / images.length}%` }}>
+              <img width="640" height="490" src={img} alt={`${title} ${j + 1}`} style={{ width: '100%', height: 'auto' }} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <ul className="slick-dots" role="tablist">
+        {images.map((_, j) => (
+          <li key={j} className={j === index ? 'slick-active' : ''} role="presentation">
+            <button type="button" role="tab" aria-label={`${j + 1} of ${images.length}`}>{j + 1}</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function ClientCases() {
   const [activeVideo, setActiveVideo] = useState(null);
-  const { index, next, prev, goTo, pause, resume } = useCarousel({
+  const { index, next, prev, pause, resume } = useCarousel({
     totalSlides: cases.length,
     slidesToShow: 1,
     loop: true,
@@ -53,63 +88,74 @@ export default function ClientCases() {
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
-      <header className="row g-0 animate fadeIn">
+      <header className="row g-0 animate fadeIn ani-trigger">
         <div className="col-10 offset-1">
           <h2 className="subtitle mb-0">Some of his popular client cases...</h2>
         </div>
       </header>
-      <div className="animate fadeIn">
+
+      <div className="animate fadeIn ani-trigger">
         <div className="row g-0 pt-20 d-lg-none">
-          <div className="col-1 offset-1 d-flex">
+          <div className="col-1 offset-1 offset-lg-9 d-flex">
             <button className="slick-arrow slick-prev case-prev ms-0 me-auto" onClick={prev} aria-label="Previous">Previous</button>
           </div>
-          <div className="col-1 offset-2 d-flex">
+          <div className="col-1 offset-2 offset-lg-0 d-flex">
             <button className="slick-arrow slick-next case-next ms-auto me-0" onClick={next} aria-label="Next">Next</button>
           </div>
         </div>
+
         <div className="row g-0 pt-30 pt-lg-0">
           <div className="col-1 d-flex">
             <button className="slick-arrow slick-prev case-prev d-none d-lg-block" onClick={prev} aria-label="Previous">Previous</button>
           </div>
+
           <div className="col-10 col-lg-10">
-            <div className="case-carousel carousel" key={index}>
-              <div>
-                <div className="row g-0">
-                  <div className="col-12 col-lg-10 offset-lg-1 pb-30 pb-lg-60">
-                    <h3 className="fs75 mb-0">{c.title}</h3>
-                  </div>
-                  <div className="d-lg-none col-11 offset-1">
-                    <div className="case-content text-content first-up w-100 my-auto">
-                      <p>{c.testimonial}</p>
-                      {c.testimonial2 && <p>{c.testimonial2}</p>}
-                    </div>
-                  </div>
-                  <div className="col-11 offset-1 col-lg-5 offset-lg-0 d-lg-flex">
-                    <div className="media-wrapper w-100 my-auto pt-20 pt-lg-0">
-                      <div className="case-inner-carousel carousel">
-                        {c.images.map((img, j) => (
-                          <div key={j}>
-                            <img src={img} alt={`${c.title} ${j + 1}`} style={{ width: '300px', height: '230px', objectFit: 'cover' }} />
-                          </div>
-                        ))}
+            <div className="case-carousel carousel slick-initialized slick-slider" key={index}>
+              <div className="slick-list draggable">
+                <div className="slick-track">
+                  <div className="slick-slide slick-current slick-active">
+                    <div className="row g-0">
+                      <div className="col-12 col-lg-10 offset-lg-1 pb-30 pb-lg-60">
+                        <h3 className="fs75 mb-0">{c.title}</h3>
                       </div>
-                      {c.videoId && (
-                        <div className="pt-20">
-                          <button onClick={() => setActiveVideo(c.videoId)} className="btn btn-solid">&#9654; Launch Video</button>
+
+                      <div className="d-lg-none col-11 offset-1">
+                        <div className="case-content text-content first-up w-100 my-auto">
+                          <p>{c.testimonial}</p>
+                          {c.testimonial2 && <p>{c.testimonial2}</p>}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="d-none d-lg-flex col-5 offset-1">
-                    <div className="case-content text-content first-up w-100 my-auto">
-                      <p>{c.testimonial}</p>
-                      {c.testimonial2 && <p>{c.testimonial2}</p>}
+                      </div>
+
+                      <div className="col-11 offset-1 col-lg-5 offset-lg-0 d-lg-flex">
+                        <div className="media-wrapper w-100 my-auto pt-20 pt-lg-0">
+                          {c.videoId ? (
+                            <div className="position-relative">
+                              <div className="video-cover">
+                                <a href="javascript:void(0)" className="video-toggle fs75 video-toggle-case-2 no-underline d-flex" onClick={() => setActiveVideo(c.videoId)} title="Play video">
+                                  <span className="sr-only">Launch Video</span>
+                                </a>
+                              </div>
+                              <img width="900" height="550" src={c.images[0]} alt={c.title} style={{ width: '100%', height: 'auto' }} />
+                            </div>
+                          ) : (
+                            <InnerCarousel images={c.images} title={c.title} />
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="d-none d-lg-flex col-5 offset-1">
+                        <div className="case-content text-content first-up w-100 my-auto">
+                          <p>{c.testimonial}</p>
+                          {c.testimonial2 && <p>{c.testimonial2}</p>}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div className="col-1 d-flex">
             <button className="slick-arrow slick-next case-next d-none d-lg-block" onClick={next} aria-label="Next">Next</button>
           </div>
@@ -117,23 +163,20 @@ export default function ClientCases() {
       </div>
 
       {activeVideo && (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 10001,
-          background: 'rgba(0,0,0,0.85)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center'
-        }} onClick={() => setActiveVideo(null)}>
-          <div style={{position: 'relative', width: '90%', maxWidth: '800px', aspectRatio: '16/9'}} onClick={e => e.stopPropagation()}>
-            <button onClick={() => setActiveVideo(null)} style={{
-              position: 'absolute', top: '-40px', right: '0',
-              background: 'none', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer'
-            }}>&times;</button>
-            <iframe
-              src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
-              title="Client Case Video"
-              style={{width: '100%', height: '100%', border: 'none'}}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
+        <div className="modal fade show d-block" style={{ background: 'rgba(0,0,0,0.85)' }} onClick={() => setActiveVideo(null)}>
+          <div className="modal-dialog modal-lg modal-dialog-centered" onClick={e => e.stopPropagation()}>
+            <div className="modal-content" style={{ background: 'transparent', border: 'none' }}>
+              <button type="button" className="btn-close btn-close-white" onClick={() => setActiveVideo(null)} style={{ position: 'absolute', top: '-40px', right: '0' }}></button>
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
+                <iframe
+                  src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+                  title="Client Case Video"
+                  style={{ width: '100%', height: '100%', border: 'none' }}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                />
+              </div>
+            </div>
           </div>
         </div>
       )}

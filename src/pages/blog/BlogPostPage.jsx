@@ -27,7 +27,7 @@ export default function BlogPostPage() {
         <div className="over row g-0 w-100 my-auto">
           <div className="col-10 offset-1 col-lg-8 col-xxl-6 pt-100 pt-lg-60">
             <div>
-              <h2 className="subtitle mb-0">Blog</h2>
+              <h2 className="subtitle mb-0">{post.category}</h2>
               <div className="inset-content">
                 <h1 className="fs45">{post.title}</h1>
               </div>
@@ -73,6 +73,18 @@ export default function BlogPostPage() {
                     </div>
                   </div>
                 )}
+
+                <div className="pt-40 d-flex flex-wrap justify-content-between align-items-center">
+                  <div>
+                    <span style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#999'}}>Share this post</span>
+                    <div className="d-flex gap-2 pt-10">
+                      <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-facebook"></i></a>
+                      <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-x-twitter"></i></a>
+                      <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + window.location.href)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                  </div>
+                  <Link to="/blogs" className="no-underline" style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#666'}}>&larr; Return to blogs</Link>
+                </div>
               </article>
 
               <div className="col-12 col-lg-3 offset-lg-1">

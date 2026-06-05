@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { getTreatment, getTreatmentsByCategory } from '../../data/treatments';
 import { getTreatmentContent } from '../../data/treatmentsContent';
@@ -35,7 +35,8 @@ function AccordionSection({ faqs }) {
 }
 
 export default function TreatmentPage() {
-  const { slug } = useParams();
+  const { pathname } = useLocation();
+  const slug = pathname.replace(/^\//, '');
   const treatment = getTreatment(slug);
   const content = getTreatmentContent(slug);
 

@@ -68,11 +68,13 @@
 
 
 /* Video cover hover play icon */
-.video-cover{position:relative;overflow:hidden}
-.video-cover:hover .play-icon{opacity:1!important}
+.video-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.video-toggle{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.9);display:flex!important;align-items:center;justify-content:center;transition:transform .3s}
+.video-toggle::after{content:"▶";font-size:28px;color:#1a1a1a;margin-left:4px}
+.video-toggle:hover{transform:scale(1.1)}
 
 /* Slick arrow defaults from theme */
-.slick-arrow{background:0;border:0;cursor:pointer}
+.slick-arrow{background:0;border:0;cursor:pointer;font-size:0;color:transparent}
 .slick-arrow.slick-disabled{opacity:.3;cursor:default}
 
 /* Override theme position:absolute on arrows - all our arrows are inline in Bootstrap grid */
@@ -86,3 +88,8 @@
 .slick-arrow.case-next,.slick-arrow.testimonials-next,
 .carousel-slider .slick-arrow.slick-next,
 .slick-arrow.about-arrow.slick-next{background-image:none}
+
+/* Inner carousel dots */
+.case-inner-carousel .slick-dots{display:flex;justify-content:center;gap:8px;list-style:none;padding:10px 0 0;margin:0}
+.case-inner-carousel .slick-dots button{width:10px;height:10px;border-radius:50%;border:1px solid #999;background:transparent;font-size:0;cursor:pointer;padding:0}
+.case-inner-carousel .slick-dots .slick-active button{background:#c9a96e;border-color:#c9a96e}
