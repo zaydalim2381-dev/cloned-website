@@ -141,7 +141,7 @@ export default function Header({ onConsultationOpen }) {
         onMouseLeave={handleMouseLeave}>
         <div id="main-menu" className="main-menu position-relative h-100">
           <div className="row g-0 h-100">
-            <div id="main-menu-sub" className="col-12 h-100 open">
+            <div id="main-menu-sub" className="col-12 h-100">
               <div className="over row g-0 h-100">
                 <div id="treatments-body-submenu" className={`sub-menu col-4 offset-1${activeMenu === 'body' ? ' current' : ''}`}>
                   <div className="pt-lg-100">
