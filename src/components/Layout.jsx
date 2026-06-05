@@ -8,7 +8,8 @@ import useScrollAnimation from '../hooks/useScrollAnimation';
 
 function getPageClass(pathname) {
   if (pathname === '/') return 'page-home';
-  if (pathname.startsWith('/blog/') || pathname.startsWith('/blogs/') || pathname.startsWith('/category/')) return 'news-single';
+  if (pathname.startsWith('/blog/') || pathname.startsWith('/category/')) return 'news-single';
+  if (pathname.startsWith('/blogs/')) return 'news-archive';
   if (pathname.startsWith('/best-plastic-surgeon')) return 'page-about';
   if (pathname.startsWith('/contact')) return 'page-contact';
   if (pathname.startsWith('/press-and-media')) return 'page-media';

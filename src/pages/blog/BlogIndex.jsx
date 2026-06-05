@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { blogPosts, categories } from '../../data/blogPosts';
 import GoogleReviews from '../../components/GoogleReviews';
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 9;
 
 export default function BlogIndex() {
   const [page, setPage] = useState(1);
@@ -12,95 +12,130 @@ export default function BlogIndex() {
 
   return (
     <main id="main" className="site-main">
-      <header id="hero" className="position-relative d-flex watermark watermark-br">
-        <div className="over row g-0 w-100 my-auto">
-          <div className="col-10 offset-1 col-lg-8 col-xxl-6 pt-100 pt-lg-60">
-            <div>
-              <h2 className="subtitle mb-0">Blog</h2>
-              <div className="inset-content">
-                <h1 className="fs100">Blog Posts</h1>
-              </div>
-              <div className="text-content">
-                <p>In these blogs learn all the important and helpful tips here by Dr Adnan Tahir on Plastic surgery and other surgeries related to breast, face and body.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bg-img">
-          <img width="520" height="400" src="https://adnan-tahir.com/wp-content/uploads/2024/01/AT-FAQs-1.jpg" className="d-lg-none cover-fit" alt="Blog Posts" />
-          <img width="1440" height="480" src="https://adnan-tahir.com/wp-content/uploads/2024/01/AT-FAQs.jpg" className="d-none d-lg-block cover-fit" alt="Blog Posts" />
-        </div>
-      </header>
-
-      <div id="main-content" className="grad-white-to-grey pt-60">
-        <div className="row g-0">
-          <div className="col-10 offset-1">
-            <div className="row g-0">
-              <div className="col-12 col-lg-8">
-                {currentPosts.map(post => (
-                  <article key={post.slug} style={{marginBottom:'50px'}}>
-                    <Link to={`/blog/${post.slug}`}>
-                      <img src={post.img} alt={post.title} style={{width:'100%', height:'280px', objectFit:'cover'}} />
-                    </Link>
-                    <div style={{paddingTop:'15px'}}>
-                      <Link to={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`} className="no-underline" style={{fontSize:'0.8rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#666'}}>
-                        {post.category}
-                      </Link>
-                      <h3 style={{fontSize:'1.4rem', fontFamily:'playfair-display, serif', marginTop:'5px'}}>
-                        <Link to={`/blog/${post.slug}`} className="no-underline">{post.title}</Link>
-                      </h3>
-                      <p style={{fontSize:'0.85rem', color:'#999'}}>{post.date}</p>
-                      <Link to={`/blog/${post.slug}`} className="btn btn-solid" style={{marginTop:'15px'}}>Read more</Link>
+      <div className="page-header header-top-padding position-relative">
+        <div className="watermark watermark-tl watermark-grey">
+          <div className="over row g-0">
+            <div className="over col-10 offset-1 col-lg-5">
+              <header className="pt-lg-60">
+                <div className="row g-0">
+                  <div className="col-12 animate fadeIn">
+                    <h1 className="fs100">Blog Posts</h1>
+                  </div>
+                  <div className="col-12 col-lg-8 col-xxl-6 section-inner-lg">
+                    <div className="text-content animate fadeIn">
+                      <p>In these blogs learn all the important and helpful tips here by Dr Adnan Tahir on Plastic surgery and other surgeries related to breast, face and body.</p>
                     </div>
-                  </article>
-                ))}
-                {page < totalPages && (
-                  <div className="text-center pt-30 pb-60">
-                    <button onClick={() => setPage(p => p + 1)} className="btn btn-solid">Load More Posts</button>
                   </div>
-                )}
-              </div>
-
-              <div className="col-12 col-lg-3 offset-lg-1">
-                <aside className="blog-sidebar">
-                  <div style={{marginBottom:'30px'}}>
-                    <h4 style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'15px'}}>Search</h4>
-                    <form role="search" onSubmit={e => e.preventDefault()} style={{display:'flex', border:'1px solid #ddd'}}>
-                      <input type="text" placeholder="Search..." style={{flex:1, padding:'10px', border:'none', fontSize:'0.85rem'}} />
-                      <button type="submit" style={{padding:'10px 15px', border:'none', background:'#1a1a1a', color:'white', cursor:'pointer'}}>Search</button>
+                </div>
+              </header>
+              <div className="over pt-20 pt-lg-40 animate fadeIn">
+                <div id="filter" className="row g-0 section-inner-lg pe-lg-0">
+                  <aside className="col-12 col-lg-4 section-inner-lg ps-lg-0 widget widget_search">
+                    <form role="search" onSubmit={e => e.preventDefault()}>
+                      <label className="sr-only" htmlFor="s">Search</label>
+                      <div className="input-group">
+                        <input className="field form-control btm-border" id="s" type="text" placeholder="Search" />
+                        <span className="input-group-append ps-2">
+                          <button className="submit btn" type="submit"><i className="fa-light fa-magnifying-glass"></i><span className="sr-only">Search</span></button>
+                        </span>
+                      </div>
                     </form>
-                  </div>
-
-                  <div style={{marginBottom:'30px'}}>
-                    <h4 style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'15px'}}>Categories</h4>
-                    <ul style={{listStyle:'none', padding:0, margin:0}}>
+                  </aside>
+                  <aside className="col-12 col-lg-4 section-inner-lg ps-lg-0 widget widget_categories">
+                    <h3 className="widget-title sr-only">Categories</h3>
+                    <select className="postform" onChange={e => { if (e.target.value) window.location.href = e.target.value; }} defaultValue="">
+                      <option value="" disabled>Category</option>
                       {categories.map(cat => (
-                        <li key={cat} style={{marginBottom:'8px'}}>
-                          <Link to={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`} style={{fontSize:'0.9rem', color:'#555'}}>
-                            {cat}
-                          </Link>
-                        </li>
+                        <option key={cat} className="level-0" value={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}>{cat}</option>
                       ))}
-                    </ul>
-                  </div>
-
-                  <div style={{marginBottom:'30px'}}>
-                    <h4 style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'15px'}}>Archives</h4>
-                    <select style={{width:'100%', padding:'10px', border:'1px solid #ddd', fontSize:'0.85rem', background:'white'}} onChange={e => { if(e.target.value) window.location.href = e.target.value; }}>
-                      <option value="">Select Month</option>
+                    </select>
+                  </aside>
+                  <aside className="col-12 col-lg-4 section-inner-lg ps-lg-0 widget widget_archive">
+                    <h3 className="widget-title sr-only">Archives</h3>
+                    <select onChange={e => { if (e.target.value) window.location.href = e.target.value; }} defaultValue="">
+                      <option value="" disabled>Select Month</option>
                       <option value="/blogs">May 2026</option>
                       <option value="/blogs">April 2026</option>
                       <option value="/blogs">March 2026</option>
                       <option value="/blogs">February 2026</option>
                       <option value="/blogs">January 2026</option>
                     </select>
-                  </div>
-                </aside>
+                  </aside>
+                </div>
+              </div>
+            </div>
+            <div className="over col-12 col-lg-5">
+              <div id="featured" className="pt-30 pt-lg-0 pb-lg-40 position-relative row g-0">
+                {blogPosts.length > 0 && (
+                  <>
+                    <div className="col-10 offset-2 col-lg-12 offset-lg-0">
+                      <Link to={`/blog/${blogPosts[0].slug}`} className="d-block animate fadeIn">
+                        <img width="500" height="675" src={blogPosts[0].img} className="" alt={blogPosts[0].title} />
+                      </Link>
+                    </div>
+                    <div className="featured-meta col-10 offset-1 col-lg-12 offset-lg-0 bg-grey section-inner pt-20 pb-30 pt-lg-40 pb-lg-60 animate fadeIn">
+                      <nav className="categories">
+                        <ul className="nav p-0 mb-2">
+                          <li><Link to={`/category/${blogPosts[0].category.toLowerCase().replace(/\s+/g, '-')}`} className="category no-underline underline-hover">{blogPosts[0].category}</Link></li>
+                        </ul>
+                      </nav>
+                      <h3 className="fs45 mb-0"><Link to={`/blog/${blogPosts[0].slug}`}>{blogPosts[0].title}</Link></h3>
+                      <div className="btn-wrap pt-30 pt-lg-60">
+                        <Link to={`/blog/${blogPosts[0].slug}`} className="btn btn-solid">Read more</Link>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div id="main-content" className="watermark watermark-bl watermark-grey">
+        <div className="post-list-outer row g-0 watermark watermark-tr watermark-grey pt-50 pt-lg-120">
+          <div className="over col-10 offset-1 row g-0">
+            {currentPosts.slice(blogPosts.length > 0 ? 1 : 0).map(post => (
+              <div key={post.slug} className="col-12 col-lg-4 px-lg-3 pb-50 animate fadeIn">
+                <div className="pb-20">
+                  <Link to={`/blog/${post.slug}`}>
+                    <img width="640" height="640" src={post.img} className="" alt={post.title} loading="lazy" />
+                  </Link>
+                </div>
+                <header>
+                  <nav className="categories pb-2">
+                    <ul className="nav">
+                      <li className="fs25 uppercase ls50">
+                        <Link to={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`} className="no-underline hover-underline">{post.category}</Link>
+                      </li>
+                    </ul>
+                  </nav>
+                  <h3 className="fs35">
+                    <Link to={`/blog/${post.slug}`} className="no-underline hover-underline">{post.title}</Link>
+                  </h3>
+                </header>
+                <div className="btn-wrap pt-20 pt-lg-3">
+                  <Link to={`/blog/${post.slug}`} className="btn btn-solid">Read more</Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {page < totalPages && (
+          <div className="pb-40 pt-lg-60 pb-lg-100 animate fadeIn">
+            <nav aria-labelledby="posts-nav-label">
+              <h2 id="posts-nav-label" className="screen-reader-text">Posts navigation</h2>
+              <ul className="pagination justify-content-center">
+                <li className="page-item fs25 ls50">
+                  <button className="btn btn-solid" onClick={() => setPage(p => p + 1)}>Load More Posts</button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
+      </div>
+
       <GoogleReviews />
     </main>
   );
