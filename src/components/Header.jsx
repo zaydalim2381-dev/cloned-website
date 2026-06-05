@@ -3,14 +3,6 @@ import { Link } from 'react-router-dom';
 import { SOCIAL } from '../data/content';
 import { TREATMENT_CATEGORIES } from '../data/treatments';
 
-const MEGA_ITEMS = [
-  { id: 'body', title: 'Body', cat: TREATMENT_CATEGORIES[0] },
-  { id: 'face', title: 'Face', cat: TREATMENT_CATEGORIES[1] },
-  { id: 'breast', title: 'Breast', cat: TREATMENT_CATEGORIES[2] },
-  { id: 'skin', title: 'Skin Tightening Technologies', cat: TREATMENT_CATEGORIES[3] },
-  { id: 'patient', title: 'Patient Experiences' },
-];
-
 const PATIENT_EXP_LINKS = [
   { title: 'Rhinoplasty', slug: 'rhinoplasty-before-and-after' },
   { title: 'Vaser HD Lipo Sculpture', slug: 'hd-lipo-sculpture-in-dubai' },
@@ -149,7 +141,7 @@ export default function Header({ onConsultationOpen }) {
         onMouseLeave={handleMouseLeave}>
         <div id="main-menu" className="main-menu position-relative h-100">
           <div className="row g-0 h-100">
-            <div id="main-menu-sub" className="col-12 h-100">
+            <div id="main-menu-sub" className="col-12 h-100 open">
               <div className="over row g-0 h-100">
                 <div id="treatments-body-submenu" className={`sub-menu col-4 offset-1${activeMenu === 'body' ? ' current' : ''}`}>
                   <div className="pt-lg-100">
