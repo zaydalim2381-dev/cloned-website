@@ -1,0 +1,76 @@
+/* React-specific overrides for pixel-perfect matching with live theme CSS */
+
+:root{--gold:#c9a96e;--gold-light:#d4b87a}
+
+/* Branding */
+.branding{max-width:175px;padding-top:30px;padding-bottom:30px;width:100%;transition:all .25s ease-in-out}
+@media(min-width:992px){.branding{width:11.458vw;max-width:220px}}
+.branding .simple-logo{display:none}
+
+/* Header overrides */
+#site-header a{color:#fff}
+#site-header .logo-shape,#site-header .logo-letters{fill:#fff}
+#header-bar{transition:padding .25s ease-in-out}
+#site-header.scrolled-down #header-bar{padding:4px 0}
+#site-header.scrolled-down .branding{padding-top:12px;padding-bottom:12px;max-width:140px}
+#site-header.scrolled-up #header-bar{padding:8px 0}
+#site-header.scrolled-up .branding{padding-top:26px;padding-bottom:26px;max-width:175px}
+@media(min-width:992px){#site-header.scrolled-down .branding{max-width:160px}#site-header.scrolled-up .branding{max-width:220px}}
+
+/* Desktop menu nav link color */
+#desktop-menu .nav-link:focus,#desktop-menu .nav-link:hover{text-decoration:underline}
+
+/* Mega menu */
+#main-menu-sub .sub-menu{display:none;position:absolute;left:0;top:0;height:100%;opacity:0;padding:135px 0 60px 4.166vw;font-weight:400;pointer-events:none}
+#main-menu-sub .sub-menu.current{display:block;opacity:1;pointer-events:auto}
+#main-menu-sub .sub-menu .nav-link{font-weight:300;padding:0;text-decoration:underline;text-transform:uppercase;font-family:playfair-display,serif;font-size:14px;color:#000;display:inline-block;margin-bottom:.25em}
+#main-menu-sub .sub-menu .nav-link:hover{color:var(--gold)}
+
+/* Close button */
+.close-wrap .close-sub{background:0;border:0;cursor:pointer;text-align:center;color:#000;padding:0;pointer-events:auto;letter-spacing:.35em;text-transform:uppercase;font-size:calc(16px + 6 * (100vw - 992px) / 928)}
+.close-wrap .close-sub i{display:block;font-size:calc(35px + 40 * (100vw - 992px) / 928);line-height:1}
+.close-wrap .close-sub span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.2em}
+
+/* Mobile menu */
+#mobile-menu-inner .dropdown-toggle{cursor:pointer}
+#mobile-menu-inner .dropdown-toggle::after{display:inline-block;margin-left:.5em;vertical-align:middle;content:"+";font-size:14px;transition:transform .2s}
+#mobile-menu-inner li.active>.dropdown-toggle::after{content:"–"}
+#mobile-menu-inner .dropdown-menu{display:none;padding:0 0 .5em 1em;list-style:none}
+#mobile-menu-inner .dropdown-menu.show{display:block}
+#mobile-menu-inner .dropdown-menu .nav-item{font-size:16px}
+.mobile-menu-open{overflow:hidden}
+.mobile-menu-open #site-header{background:0 0}
+
+/* Fixed navbar */
+#fixed-navbar{position:fixed;width:100%;bottom:0;z-index:2}
+#fixed-navbar .consultation-trigger{border-radius:0;height:56px;line-height:56px;font-size:14px}
+
+/* Footer */
+#footer-wrap .social .nav{gap:20px}
+#footer-wrap .social .nav li a{color:#000;transition:color .2s}
+#footer-wrap .social .nav li a:hover{color:var(--gold);opacity:1}
+#site-footer .info-row{border-top:1px solid #000;text-transform:uppercase}
+#site-footer .credit{padding-right:1.5em;background:url(https://adnan-tahir.com/wp-content/themes/adnan-tahir-bm/images/blowmedia.png) center right no-repeat transparent;background-size:contain}
+@media(min-width:992px){#footer-menu .nav,#policy-menu .nav{column-count:2}}
+#footer-menu .nav-item,#policy-menu .nav-item{margin-bottom:.25em}
+
+/* Modal consultation */
+.modal-content{background:#f5f0eb;padding:40px;position:relative}
+.popup-open{overflow:hidden}
+
+/* Video wrapper */
+.video-wrapper{background:#000;position:relative;padding-bottom:56.25%;height:0}
+.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+
+/* Animation trigger (for React IntersectionObserver) */
+@media(min-width:992px){.animate.fadeIn{opacity:0;transform:translateY(30px);transition:opacity .75s ease-in-out,transform .75s ease-in-out}}
+.animate.fadeIn.animated{opacity:1;transform:translateY(0)}
+
+
+/* Video cover hover play icon */
+.video-cover{position:relative;overflow:hidden}
+.video-cover:hover .play-icon{opacity:1!important}
+
+/* Slick arrow defaults from theme */
+.slick-arrow{background:0;border:0;cursor:pointer}
+.slick-arrow.slick-disabled{opacity:.3;cursor:default}
