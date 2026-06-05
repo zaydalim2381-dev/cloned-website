@@ -62,6 +62,11 @@ export default function Header({ onConsultationOpen }) {
     return () => document.body.classList.remove('mobile-menu-open');
   }, [mobileOpen]);
 
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', !!activeMenu);
+    return () => document.body.classList.remove('menu-open');
+  }, [activeMenu]);
+
   return (
     <>
       <header id="site-header">

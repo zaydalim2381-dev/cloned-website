@@ -1,14 +1,24 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { blogPosts, categories } from '../../data/blogPosts';
 import GoogleReviews from '../../components/GoogleReviews';
 
 const POSTS_PER_PAGE = 9;
 
 export default function BlogIndex() {
-  const [page, setPage] = useState(1);
+  const { pageNum } = useParams();
+  const currentPage = parseInt(pageNum, 10) || 1;
   const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE);
-  const currentPosts = blogPosts.slice(0, page * POSTS_PER_PAGE);
+  const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+  const currentPosts = blogPosts.slice(startIdx, startIdx + POSTS_PER_PAGE);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      pageNumbers.push(i);
+    } else if (pageNumbers[pageNumbers.length - 1] !== '...') {
+      pageNumbers.push('...');
+    }
+  }
 
   return (
     <main id="main" className="site-main">
@@ -66,7 +76,7 @@ export default function BlogIndex() {
             </div>
             <div className="over col-12 col-lg-5">
               <div id="featured" className="pt-30 pt-lg-0 pb-lg-40 position-relative row g-0">
-                {blogPosts.length > 0 && (
+                {currentPage === 1 && blogPosts.length > 0 && (
                   <>
                     <div className="col-10 offset-2 col-lg-12 offset-lg-0">
                       <Link to={`/blog/${blogPosts[0].slug}`} className="d-block animate fadeIn">
@@ -95,7 +105,7 @@ export default function BlogIndex() {
       <div id="main-content" className="watermark watermark-bl watermark-grey">
         <div className="post-list-outer row g-0 watermark watermark-tr watermark-grey pt-50 pt-lg-120">
           <div className="over col-10 offset-1 row g-0">
-            {currentPosts.slice(blogPosts.length > 0 ? 1 : 0).map(post => (
+            {currentPosts.slice(currentPage === 1 ? 1 : 0).map(post => (
               <div key={post.slug} className="col-12 col-lg-4 px-lg-3 pb-50 animate fadeIn">
                 <div className="pb-20">
                   <Link to={`/blog/${post.slug}`}>
@@ -122,18 +132,38 @@ export default function BlogIndex() {
           </div>
         </div>
 
-        {page < totalPages && (
-          <div className="pb-40 pt-lg-60 pb-lg-100 animate fadeIn">
-            <nav aria-labelledby="posts-nav-label">
-              <h2 id="posts-nav-label" className="screen-reader-text">Posts navigation</h2>
-              <ul className="pagination justify-content-center">
+        <div className="pb-40 pt-lg-60 pb-lg-100 animate fadeIn">
+          <nav aria-labelledby="posts-nav-label">
+            <h2 id="posts-nav-label" className="screen-reader-text">Posts navigation</h2>
+            <ul className="pagination justify-content-center">
+              {currentPage > 1 && (
                 <li className="page-item fs25 ls50">
-                  <button className="btn btn-solid" onClick={() => setPage(p => p + 1)}>Load More Posts</button>
+                  <Link className="page-link" to={currentPage === 2 ? '/blogs' : `/blogs/page/${currentPage - 1}`}>
+                    <i className="fa-light fa-arrow-left"><span className="sr-only">Previous</span></i>
+                  </Link>
                 </li>
-              </ul>
-            </nav>
-          </div>
-        )}
+              )}
+              {pageNumbers.map((num, idx) => (
+                <li key={idx} className={`page-item fs25 ls50${num === currentPage ? ' active' : ''}`}>
+                  {num === '...' ? (
+                    <span className="page-link dots">&hellip;</span>
+                  ) : num === currentPage ? (
+                    <span aria-current="page" className="page-link current">{num}</span>
+                  ) : (
+                    <Link className="page-link" to={num === 1 ? '/blogs' : `/blogs/page/${num}`}>{num}</Link>
+                  )}
+                </li>
+              ))}
+              {currentPage < totalPages && (
+                <li className="page-item fs25 ls50">
+                  <Link className="next page-link" to={`/blogs/page/${currentPage + 1}`}>
+                    <i className="fa-light fa-arrow-right"><span className="sr-only">Next</span></i>
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </nav>
+        </div>
       </div>
 
       <GoogleReviews />
