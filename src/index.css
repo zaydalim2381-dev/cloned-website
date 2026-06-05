@@ -74,3 +74,8 @@
 /* Slick arrow defaults from theme */
 .slick-arrow{background:0;border:0;cursor:pointer}
 .slick-arrow.slick-disabled{opacity:.3;cursor:default}
+
+/* Override theme position:absolute on arrows - our Carousel puts arrows inline in grid */
+.carousel-slider .slick-arrow{position:static;top:auto;transform:none;color:#1a1a1a;font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;height:auto;width:auto;margin:auto}
+.carousel-slider .slick-arrow.slick-prev{background-image:none}
+.carousel-slider .slick-arrow.slick-next{background-image:none}

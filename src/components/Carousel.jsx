@@ -42,7 +42,7 @@ export default function Carousel({
 
   return (
     <div
-      className={className}
+      className={`carousel-slider${className ? ' ' + className : ''}`}
       style={style}
       onMouseEnter={pause}
       onMouseLeave={resume}
