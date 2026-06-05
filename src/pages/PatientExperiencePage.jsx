@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import GoogleReviews from '../components/GoogleReviews';
 
 const experiences = {
@@ -78,7 +78,8 @@ const experiences = {
 };
 
 export default function PatientExperiencePage() {
-  const { slug } = useParams();
+  const { pathname } = useLocation();
+  const slug = pathname.replace(/^\//, '');
   const exp = experiences[slug];
   const [openIdx, setOpenIdx] = useState(null);
 

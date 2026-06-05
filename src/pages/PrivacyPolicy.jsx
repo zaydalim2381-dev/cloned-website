@@ -2,15 +2,17 @@ import PageHero from '../components/PageHero';
 
 export default function PrivacyPolicy() {
   return (
-      <main className="site-main">
-        <PageHero
-          title="Privacy Policy"
-          subtitle="Your Privacy Matters"
-          bgImage="https://adnan-tahir.com/wp-content/uploads/2023/10/home-banner.jpg"
-        />
-        <section className="py-60">
-          <div className="row g-0">
-            <div className="col-10 offset-1" style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <main className="site-main">
+      <PageHero
+        title="Privacy Policy"
+        subtitle="Policies"
+        bgImage="https://adnan-tahir.com/wp-content/uploads/2024/01/AT-FAQs.jpg"
+        mobileBgImage="https://adnan-tahir.com/wp-content/uploads/2024/01/AT-FAQs-1.jpg"
+      />
+      <div id="main-content" className="grad-white-to-grey pt-60 pb-60">
+        <section className="row g-0">
+          <div className="col-10 offset-1 col-lg-8" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div className="text-content">
               <h2>Introduction</h2>
               <p>Dr. Adnan Tahir ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
 
@@ -39,6 +41,7 @@ export default function PrivacyPolicy() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
+    </main>
   );
 }

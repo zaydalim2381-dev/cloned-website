@@ -77,6 +77,9 @@ export const treatments = [
   { slug: 'vaser', name: 'VASER Technology', category: 'Skin',
     img: 'https://adnan-tahir.com/wp-content/uploads/2023/10/AT-Vaser-HD-Liposculpture-Featured.jpg',
     desc: 'VASER (Vibration Amplification of Sound Energy at Resonance) is an advanced ultrasound technology used for precise fat removal and body sculpting.' },
+  { slug: 'j-plasma', name: 'J Plasma', category: 'Skin',
+    img: 'https://adnan-tahir.com/wp-content/uploads/2023/10/AT-Vaser-HD-Liposculpture-Featured.jpg',
+    desc: 'J Plasma (Renuvion) is a helium plasma technology that delivers controlled energy to tighten skin and stimulate collagen production, often used in combination with liposuction.' },
 ];
 
 export function getTreatment(slug) {

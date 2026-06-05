@@ -75,7 +75,7 @@ export default function SiteMapPage() {
                   const catSlug = cat.toLowerCase().replace(/\s+/g, '-');
                   return (
                     <div key={cat} style={{ breakInside: 'avoid', marginBottom: '12px' }}>
-                      <Link to={`/blog/category/${catSlug}`} style={{ textDecoration: 'none', color: '#1a1a1a', fontSize: '1rem' }}>
+                      <Link to={`/category/${catSlug}`} style={{ textDecoration: 'none', color: '#1a1a1a', fontSize: '1rem' }}>
                         {cat}
                       </Link>
                     </div>
