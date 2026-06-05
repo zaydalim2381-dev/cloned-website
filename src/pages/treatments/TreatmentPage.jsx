@@ -197,6 +197,22 @@ export default function TreatmentPage() {
         </section>
       )}
 
+      <section className="watermark watermark-tl watermark-grey pt-40 pb-40 pt-lg-60 pb-lg-60">
+        <div className="over row g-0">
+          <div className="col-10 offset-1 col-lg-8 offset-lg-2">
+            <div className="text-center animate fadeIn">
+              <header><h2 className="subtitle mb-0">Why Dr Adnan Tahir?</h2></header>
+              <h3 className="fs45 playfair pt-10">A Trusted Choice for {treatment.name} in Dubai</h3>
+              <div className="text-content pt-20 pt-lg-30">
+                <p>Dr Adnan Tahir is a highly qualified consultant plastic surgeon with over 20 years of surgical experience and advanced fellowship training in aesthetic surgery from Rotterdam, Netherlands. He is widely recognised as one of the leading plastic surgeons in Dubai, known for achieving natural-looking results.</p>
+                <p>Registered with the UK General Medical Council (Licence No. 5201904) and licensed by the Dubai Health Authority (DHA Licence No. DHA-P-0156706), he follows internationally recognised standards of surgical excellence and patient safety. Currently practising at CosmeSurge Hospital, Jumeirah Beach Road, Dubai.</p>
+                <p>Known for his "less is more" philosophy, Dr Adnan focuses on subtle enhancement rather than overcorrection, ensuring outcomes look elegant, proportionate, and natural. Patients consistently appreciate his transparency, professionalism, and personalised care.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <GoogleReviews />
 
       {related.length > 0 && (
