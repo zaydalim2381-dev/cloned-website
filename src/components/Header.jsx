@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import { SOCIAL } from '../data/content';
 import { TREATMENT_CATEGORIES } from '../data/treatments';
 
+const MEGA_ITEMS = [
+  { id: 'body', title: 'Body', cat: TREATMENT_CATEGORIES[0] },
+  { id: 'face', title: 'Face', cat: TREATMENT_CATEGORIES[1] },
+  { id: 'breast', title: 'Breast', cat: TREATMENT_CATEGORIES[2] },
+  { id: 'skin', title: 'Skin Tightening Technologies', cat: TREATMENT_CATEGORIES[3] },
+  { id: 'patient', title: 'Patient Experiences' },
+];
+
 const PATIENT_EXP_LINKS = [
   { title: 'Rhinoplasty', slug: 'rhinoplasty-before-and-after' },
   { title: 'Vaser HD Lipo Sculpture', slug: 'hd-lipo-sculpture-in-dubai' },
