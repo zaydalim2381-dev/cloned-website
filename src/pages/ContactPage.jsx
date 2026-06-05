@@ -20,7 +20,7 @@ export default function ContactPage() {
           <div className="col-10 offset-1">
             <div className="text-content" style={{fontSize:'1.2rem'}}>
               <p><a href="mailto:dradnantahirenquiries@gmail.com" className="no-underline fs35 playfair" target="_blank" rel="noreferrer"><i className="fa-solid fa-envelope me-3"></i>Send us an email</a></p>
-              <p><a href="tel:+971505674770" className="no-underline fs35 playfair"><i className="fa-solid fa-phone-rotary me-3"></i>+971 50 567 4770</a></p>
+              <p><a href="tel:+971505674770" className="no-underline fs35 playfair"><i className="fa-solid fa-phone me-3"></i>+971 50 567 4770</a></p>
               <p><a rel="nofollow" href="https://api.whatsapp.com/send?phone=971505674770" className="no-underline fs35 playfair" target="_blank"><i className="fa-brands fa-whatsapp me-3"></i>+971 50 567 4770</a></p>
             </div>
           </div>

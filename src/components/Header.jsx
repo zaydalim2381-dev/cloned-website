@@ -76,7 +76,7 @@ export default function Header({ onConsultationOpen }) {
                   <span className="sr-only">{SOCIAL.email}</span>
                 </a>
                 <a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="ls50 no-underline d-inline-block">
-                  <i className="fa-solid fa-phone-rotary fs35 me-2 me-lg-3"></i>
+                  <i className="fa-solid fa-phone fs35 me-2 me-lg-3"></i>
                   <span className="fs25 hover-underline d-none d-lg-inline-block">{SOCIAL.phone}</span>
                 </a>
                 <a rel="nofollow" href={SOCIAL.whatsapp} className="whatsapp no-underline d-inline-block d-lg-none" title="WhatsApp" target="_blank">
@@ -300,7 +300,7 @@ export default function Header({ onConsultationOpen }) {
                   <i className="fa-solid fa-envelope fs45 me-2"></i> <span className="fs35 ls50">Send us an email</span>
                 </a>
                 <a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="no-underline d-inline-block">
-                  <i className="fa-solid fa-phone-rotary fs45 me-2"></i>
+                  <i className="fa-solid fa-phone fs45 me-2"></i>
                   <span className="fs35 ls50">{SOCIAL.phone}</span>
                 </a>
               </div>

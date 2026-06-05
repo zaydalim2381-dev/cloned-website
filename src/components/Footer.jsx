@@ -45,7 +45,7 @@ export default function Footer() {
               </div>
               <div>
                 <a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="fs35 ls50 playfair no-underline">
-                  <i className="fa-solid fa-phone-rotary me-3"></i><span className="hover-underline">{SOCIAL.phone}</span>
+                  <i className="fa-solid fa-phone me-3"></i><span className="hover-underline">{SOCIAL.phone}</span>
                 </a>
               </div>
             </div>

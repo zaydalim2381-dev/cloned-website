@@ -10,7 +10,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
           <div className="col-12 col-lg-2 col-xxl-1 pe-lg-2 d-lg-flex">
             <div className="m-auto text-center">
               <button className="consultation-trigger ls200" onClick={onClose}>
-                <i className="fa-thin fa-xmark fs65 d-block"></i>
+                <i className="fa-solid fa-xmark fs65 d-block"></i>
                 <span className="sr-only">Close</span>
               </button>
             </div>
@@ -39,7 +39,7 @@ export default function ConsultationModal({ isOpen, onClose }) {
                 <h4 className="fs35 mb-0">Or reach out to him directly</h4>
                 <div className="section-inner-lg pt-20 pt-lg-40">
                   <p><a href={`mailto:${SOCIAL.email}`} className="fs35 no-underline" target="_blank" rel="noreferrer"><i className="fa-solid fa-envelope me-3"></i><span className="hover-underline">{SOCIAL.email}</span></a></p>
-                  <p><a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="fs35 no-underline"><i className="fa-solid fa-phone-rotary me-3"></i><span className="hover-underline">{SOCIAL.phone}</span></a></p>
+                  <p><a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="fs35 no-underline"><i className="fa-solid fa-phone me-3"></i><span className="hover-underline">{SOCIAL.phone}</span></a></p>
                   <p><a rel="nofollow" href={SOCIAL.whatsapp} className="fs35 no-underline"><i className="fa-brands fa-whatsapp me-3"></i><span className="hover-underline">{SOCIAL.phone}</span></a></p>
                 </div>
               </div>

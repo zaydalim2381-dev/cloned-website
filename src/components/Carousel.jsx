@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import useCarousel from '../hooks/useCarousel';
 
 export default function Carousel({
@@ -15,6 +15,9 @@ export default function Carousel({
 }) {
   const items = Array.isArray(children) ? children : [children];
   const totalSlides = items.length;
+  const containerRef = useRef(null);
+  const [slideWidth, setSlideWidth] = useState(0);
+
   const { index, slidesToShow: effective, next, prev, goTo, isFirst, isLast, pause, resume } = useCarousel({
     totalSlides,
     slidesToShow,
@@ -24,7 +27,18 @@ export default function Carousel({
     responsive,
   });
 
-  const visibleItems = items.slice(index, index + effective);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const measure = () => setSlideWidth(el.offsetWidth / effective);
+    measure();
+    let timer;
+    const handle = () => { clearTimeout(timer); timer = setTimeout(measure, 100); };
+    window.addEventListener('resize', handle);
+    return () => { window.removeEventListener('resize', handle); clearTimeout(timer); };
+  }, [effective]);
+
+  if (totalSlides === 0) return null;
 
   return (
     <div
@@ -46,20 +60,24 @@ export default function Carousel({
             </button>
           </div>
         )}
-        <div className={showArrows ? 'col-10' : 'col-12'}>
-          <div style={{
-            display: 'flex', gap: '20px', overflow: 'hidden',
-            padding: '20px 0'
-          }}>
-            {visibleItems.map((item, i) => (
-              <div key={i} style={{
-                flex: `0 0 ${100 / effective}%`,
-                padding: '0 10px',
-                minWidth: 0,
-              }}>
-                {item}
-              </div>
-            ))}
+        <div className={showArrows ? 'col-10' : 'col-12'} style={{ overflow: 'hidden' }}>
+          <div ref={containerRef} style={{ overflow: 'hidden', padding: '20px 0' }}>
+            <div style={{
+              display: 'flex',
+              gap: '20px',
+              transform: slideWidth ? `translateX(-${index * (slideWidth + 20)}px)` : 'none',
+              transition: 'transform 0.5s ease-in-out',
+            }}>
+              {items.map((item, i) => (
+                <div key={i} style={{
+                  flex: '0 0 auto',
+                  width: slideWidth ? `${slideWidth}px` : `${100 / effective}%`,
+                  minWidth: 0,
+                }}>
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         {showArrows && (
