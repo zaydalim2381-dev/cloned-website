@@ -61,6 +61,7 @@ export default function TreatmentPage() {
   }
 
   const related = getTreatmentsByCategory(treatment.category).filter(t => t.slug !== slug);
+  const heroImg = treatment.img.replace(/-Featured\.(jpg|png)/, '-Hero.jpg');
 
   return (
     <main id="main" className="site-main">
@@ -71,18 +72,32 @@ export default function TreatmentPage() {
               <div className="col-10 offset-1 col-lg-12 offset-lg-0">
                 <div className="animate fadeIn">
                   <h3 className="subtitle mb-0 mb-lg-2">{treatment.category}</h3>
+                  <div className="section-inner-lg pe-lg-0">
+                    <h1 className="fs65">{treatment.name} In Dubai</h1>
+                  </div>
                 </div>
-                <h1 className="fs65">{treatment.name} In Dubai</h1>
-                <div className="text-content animate fadeIn">
+              </div>
+              <div className="col-11 pb-20 d-lg-none">
+                <div className="watermark watermark-br">
+                  <img width="900" height="810" src={heroImg} className="cover-fit" alt={treatment.name} loading="lazy" />
+                </div>
+              </div>
+              <div className="col-12 d-none d-lg-block">
+                <div className="section-inner pe-0 text-content animate fadeIn">
                   <p>{treatment.desc}</p>
                 </div>
               </div>
             </div>
+            <div className="col-10 offset-1 d-lg-none">
+              <div className="text-content animate fadeIn">
+                <p>{treatment.desc}</p>
+              </div>
+            </div>
           </div>
           <div className="header-image col-12 row g-0 d-none d-lg-flex">
-            <div className="col-5 position-relative offset-lg-6">
+            <div className="col-5 position-relative">
               <div className="bg-img watermark watermark-br">
-                <img loading="lazy" width="720" height="810" src={treatment.img} className="cover-fit" alt={treatment.name} />
+                <img loading="lazy" width="900" height="810" src={heroImg} className="cover-fit" alt={treatment.name} />
               </div>
             </div>
           </div>
