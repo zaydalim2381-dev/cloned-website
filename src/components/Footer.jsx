@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="col-10 offset-1 position-relative bg-grey text-white">
           <div className="over text-center section-inner py-30 py-lg-40">
             <div className="pb-100 pb-lg-100 animate fadeIn">
-              <h4 className="subtitle mb-0"><span className="text-gold">Meet Dr Adnan @</span></h4>
+              <h4 className="subtitle mb-0">Meet Dr Adnan @</h4>
             </div>
             <i className="fa-solid fa-map-pin fs100 animate fadeIn" style={{color:'#fff'}}></i>
             <div className="pt-20">
@@ -45,7 +45,7 @@ export default function Footer() {
               </div>
               <div>
                 <a href={`tel:${SOCIAL.phone.replace(/\s/g, '')}`} className="fs35 ls50 playfair no-underline">
-                  <i className="fa-solid fa-phone me-3"></i><span className="hover-underline">{SOCIAL.phone}</span>
+                  <i className="fa-solid fa-phone-rotary me-3"></i><span className="hover-underline">{SOCIAL.phone}</span>
                 </a>
               </div>
             </div>

@@ -9,24 +9,30 @@ function AccordionSection({ faqs }) {
   if (!faqs || faqs.length === 0) return null;
   return (
     <section id="faqs" className="pb-20 pb-lg-60">
-      <div className="row g-0">
-        <div className="col-10 offset-1 col-lg-8 offset-lg-2">
-          <header className="animate fadeIn"><h2 className="fs100 mb-0">FAQs</h2></header>
-          <div className="pt-20 pt-lg-40">
-            {faqs.map((faq, i) => (
-              <div key={i} className={`accordion-item${openIdx === i ? ' active' : ''}`} style={{ borderBottom: '1px solid #ccc' }}>
-                <button
-                  className="accordion-trigger"
-                  onClick={() => setOpenIdx(openIdx === i ? null : i)}
-                  style={{ width: '100%', background: 'none', border: 'none', padding: '15px 0', cursor: 'pointer', textAlign: 'left', font: 'inherit' }}
-                >
-                  <h3 className="fs35 mb-0 playfair">{faq.q}</h3>
-                </button>
-                <div className="accordion-content" style={{ display: openIdx === i ? 'block' : 'none', paddingBottom: '15px' }}>
-                  <p className="text-content" style={{ margin: 0 }}>{faq.a}</p>
-                </div>
+      <div className="faqs-wrap bg-marble position-relative pb-lg-120">
+        <div className="over row g-0 flip">
+          <div className="col-1 d-none d-lg-block"></div>
+          <div className="col-10 offset-1 col-lg-8 offset-lg-0 pb-50 pb-lg-0 pt-lg-120">
+            <div className="position-relative pt-60 pt-lg-100">
+              <header>
+                <h2 className="fs100 floating-title animate fadeIn">FAQ</h2>
+              </header>
+              <div className="accordion-list">
+                {faqs.map((faq, i) => (
+                  <div key={i} className="accordion-item animate fadeIn">
+                    <h3 className={`question mb-0${openIdx === i ? ' current' : ''}`} onClick={() => setOpenIdx(openIdx === i ? null : i)}>
+                      {faq.q}
+                      <span className="arrow"></span>
+                    </h3>
+                    <div className={`answer${openIdx === i ? ' active' : ''}`}>
+                      <div className="text-content">
+                        <p>{faq.a}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>

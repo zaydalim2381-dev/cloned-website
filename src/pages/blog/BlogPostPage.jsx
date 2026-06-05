@@ -1,6 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
-import { getPost, blogPosts, categories } from '../../data/blogPosts';
+import { getPost } from '../../data/blogPosts';
 import GoogleReviews from '../../components/GoogleReviews';
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDate();
+  const suffix = day > 3 ? 'th' : ['st', 'nd', 'rd'][day - 1] || 'th';
+  const month = d.toLocaleString('en-GB', { month: 'long' });
+  return `${day}${suffix} ${month} ${d.getFullYear()}`;
+}
 
 export default function BlogPostPage() {
   const { slug } = useParams();
@@ -19,94 +27,112 @@ export default function BlogPostPage() {
     );
   }
 
-  const related = blogPosts.filter(p => p.category === post.category && p.slug !== slug).slice(0, 3);
+  const catSlug = post.category.toLowerCase().replace(/\s+/g, '-');
+  const url = window.location.href;
+  const shareText = encodeURIComponent(post.title);
 
   return (
     <main id="main" className="site-main">
-      <header id="hero" className="position-relative d-flex watermark watermark-br">
-        <div className="over row g-0 w-100 my-auto">
-          <div className="col-10 offset-1 col-lg-8 col-xxl-6 pt-100 pt-lg-60">
-            <div>
-              <h2 className="subtitle mb-0">{post.category}</h2>
-              <div className="inset-content">
-                <h1 className="fs45">{post.title}</h1>
-              </div>
-              <p className="pt-10" style={{fontSize:'0.85rem', color:'#999'}}>{post.date}</p>
+      <header className="page-header header-top-padding position-relative">
+        <div className="watermark watermark-tl watermark-grey">
+          <div className="over row g-0">
+            <div className="col-12 col-lg-5 offset-lg-1">
+              <header className="pt-lg-60">
+                <div className="row g-0">
+                  <div className="col-10 offset-1 col-lg-12 offset-lg-0 animate fadeIn">
+                    <div className="section-inner-lg">
+                      <nav className="categories pb-2">
+                        <ul className="nav">
+                          <li><Link to={`/category/${catSlug}`} className="category no-underline underline-hover">{post.category}</Link></li>
+                        </ul>
+                      </nav>
+                    </div>
+                    <div className="section-inner-lg ps-lg-0">
+                      <h1 className="fs75">{post.title}</h1>
+                      <p className="category mb-0">{formatDate(post.date)}</p>
+                    </div>
+                  </div>
+                  <div className="col-11 offset-1 pt-20 d-lg-none animate fadeIn">
+                    <img width="640" height="640" src={post.img} className="w-100" alt={post.title} loading="lazy" />
+                  </div>
+                  <div className="section-inner-lg col-10 offset-1 col-lg-12 offset-lg-0 pt-20 pt-lg-40">
+                    <div className="text-content animate fadeIn">
+                      <p>This article explores {post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.</p>
+                    </div>
+                  </div>
+                </div>
+              </header>
+            </div>
+            <div className="col-5 d-none d-lg-block animate fadeIn">
+              <img width="640" height="640" src={post.img} className="w-100" alt={post.title} loading="lazy" />
             </div>
           </div>
         </div>
-        <div className="bg-img">
-          <img width="520" height="400" src={post.img} className="d-lg-none cover-fit" alt={post.title} />
-          <img width="1440" height="480" src={post.img} className="d-none d-lg-block cover-fit" alt={post.title} />
-        </div>
       </header>
 
-      <div id="main-content" className="grad-white-to-grey pt-60 pb-60">
-        <div className="row g-0">
-          <div className="col-10 offset-1">
-            <div className="row g-0">
-              <article className="col-12 col-lg-8">
-                <Link to={`/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`} className="no-underline" style={{fontSize:'0.8rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#666'}}>
-                  {post.category}
-                </Link>
-                <div className="text-content pt-20">
-                  <p>This article explores {post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.</p>
-                  <p>Dr. Adnan Tahir is one of the best plastic surgeons in Dubai, passionate about delivering quality outcomes in aesthetics. He believes in doing the minimum to achieve the desired outcome that is natural-looking and proportionate.</p>
-                  <p>For a personalized consultation regarding {post.category.toLowerCase()}, contact Dr. Adnan Tahir's clinic to discuss your options.</p>
-                </div>
-
-                <div className="pt-40" style={{padding:'30px', background:'#f5f0eb'}}>
-                  <h3 style={{fontFamily:'playfair-display, serif', fontSize:'1.3rem', marginBottom:'10px'}}>Book a Consultation</h3>
-                  <p>Call: <a href="tel:+971505674770" className="no-underline">+971 50 567 4770</a></p>
-                </div>
-
-                {related.length > 0 && (
-                  <div className="pt-50">
-                    <h2 className="subtitle mb-0" style={{marginBottom:'20px'}}>Related Posts</h2>
-                    <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(250px, 1fr))', gap:'20px'}}>
-                      {related.map(p => (
-                        <Link key={p.slug} to={`/blog/${p.slug}`} style={{textDecoration:'none', color:'#1a1a1a'}}>
-                          <img src={p.img} alt={p.title} style={{width:'100%', height:'180px', objectFit:'cover'}} />
-                          <h3 style={{fontSize:'1rem', fontFamily:'playfair-display, serif', marginTop:'8px'}}>{p.title}</h3>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-40 d-flex flex-wrap justify-content-between align-items-center">
-                  <div>
-                    <span style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#999'}}>Share this post</span>
-                    <div className="d-flex gap-2 pt-10">
-                      <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-facebook"></i></a>
-                      <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-x-twitter"></i></a>
-                      <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + window.location.href)}`} target="_blank" rel="noopener noreferrer" className="no-underline" style={{color:'#1a1a1a', fontSize:'1.2rem'}}><i className="fa-brands fa-whatsapp"></i></a>
-                    </div>
-                  </div>
-                  <Link to="/blogs" className="no-underline" style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#666'}}>&larr; Return to blogs</Link>
-                </div>
-              </article>
-
-              <div className="col-12 col-lg-3 offset-lg-1">
-                <aside className="blog-sidebar" style={{paddingTop:'50px'}}>
-                  <div style={{marginBottom:'30px'}}>
-                    <h4 style={{fontSize:'0.85rem', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'15px'}}>Categories</h4>
-                    <ul style={{listStyle:'none', padding:0, margin:0}}>
-                      {categories.map(cat => (
-                        <li key={cat} style={{marginBottom:'8px'}}>
-                          <Link to={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`} style={{fontSize:'0.9rem', color:'#555'}}>
-                            {cat}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </aside>
+      <div id="main-content" className="pt-lg-60 watermark watermark-bl watermark-grey pb-60 pb-lg-120">
+        <div className="watermark watermark-tr watermark-grey">
+          <div className="over row g-0 pb-40 pb-lg-60">
+            <div className="col-10 offset-1 col-lg-8 offset-lg-2 pt-60 pt-lg-100">
+              <div className="section-inner-lg text-content animate fadeIn">
+                <p>This article explores {post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.</p>
+                <p>Dr. Adnan Tahir is one of the best plastic surgeons in Dubai, passionate about delivering quality outcomes in aesthetics. He believes in doing the minimum to achieve the desired outcome that is natural-looking and proportionate.</p>
+                <p>For a personalized consultation regarding {post.category.toLowerCase()}, contact Dr. Adnan Tahir&apos;s clinic to discuss your options.</p>
               </div>
+            </div>
+
+            <div className="col-10 offset-1 col-lg-8 offset-lg-2 pt-60 pt-lg-100">
+              <header className="animate fadeIn">
+                <h2 className="fs75">Book a Consultation</h2>
+              </header>
+              <div className="section-inner-lg text-content animate fadeIn">
+                <p>Call: <a href="tel:+971505674770" className="no-underline">+971 50 567 4770</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="over row g-0 pb-lg-120">
+          <div className="col-8 offset-1 offset-lg-2 d-lg-flex">
+            <div className="section-inner-lg w-100 mt-auto">
+              <div className="sharing d-lg-inline-block animate fadeIn">
+                <h3 className="subtitle">Share blog post</h3>
+                <ul className="social-dots list-inline mb-0 justify-content-center d-inline-block">
+                  <li className="list-inline-item mb-0">
+                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} className="btn-colour" target="_blank" rel="noopener noreferrer">
+                      <i className="fa-brands fa-linkedin-in"></i>
+                    </a>
+                  </li>
+                  <li className="list-inline-item mb-0">
+                    <a href={`https://twitter.com/intent/tweet?text=${shareText} - ${encodeURIComponent(url)}`} className="btn-colour" target="_blank" rel="noopener noreferrer">
+                      <i className="fa-brands fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li className="list-inline-item mb-0">
+                    <a href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}&t=${shareText}`} className="btn-colour" target="_blank" rel="noopener noreferrer">
+                      <i className="fa-brands fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li className="list-inline-item mb-0">
+                    <a href={`mailto:?subject=${shareText}&body=${encodeURIComponent(url)}`} className="btn-colour" target="_blank" rel="noopener noreferrer">
+                      <i className="fa-solid fa-envelope"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="btn-wrap pt-60 pt-lg-60 animate fadeIn">
+                <Link to="/blogs/" className="btn btn-solid">Return to blogs</Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-2 col-lg-1 d-flex position-relative animate fadeIn">
+            <div className="scroll-btn-wrap">
+              <button data-target="#content" className="btn btn-solid smooth-scroll"><i className="fa-regular fa-arrow-left"></i> Back to top</button>
             </div>
           </div>
         </div>
       </div>
+
       <GoogleReviews />
     </main>
   );
