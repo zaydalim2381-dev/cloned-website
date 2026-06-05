@@ -11,7 +11,7 @@ const treatments = [
 
 export default function FeaturedTreatments() {
   return (
-    <section id="featured-treatments" className="pb-60 py-lg-40 position-relative">
+    <section id="featured-treatments" className="pb-60 py-lg-40 position-relative over">
       <header className="row g-0 animate fadeIn">
         <div className="col-10 offset-1 text-center">
           <h2 className="fs100 mb-0">Our Popular Procedures</h2>

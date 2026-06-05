@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Carousel from './Carousel';
 
 const testimonials = [
@@ -36,6 +36,7 @@ const testimonials = [
 
 export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState(null);
+  const carouselRef = useRef(null);
 
   return (
     <section id="testimonials" className="over pt-60 pt-lg-60">
@@ -47,16 +48,16 @@ export default function Testimonials() {
       <div className="animate fadeIn">
         <div className="row g-0 pt-40 pt-lg-60">
           <div className="col-1 offset-1 offset-lg-9 d-flex">
-            <button className="slick-arrow slick-prev testimonials-prev ms-0 me-auto" aria-label="Previous">Previous</button>
+            <button className="slick-arrow slick-prev testimonials-prev ms-0 me-auto" onClick={() => carouselRef.current?.prev()} aria-label="Previous">Previous</button>
           </div>
           <div className="col-1 offset-2 offset-lg-0 d-flex">
-            <button className="slick-arrow slick-next testimonials-next ms-auto me-0" aria-label="Next">Next</button>
+            <button className="slick-arrow slick-next testimonials-next ms-auto me-0" onClick={() => carouselRef.current?.next()} aria-label="Next">Next</button>
           </div>
         </div>
         <div className="row g-0 pt-20 pt-lg-0">
           <div className="col-10 offset-1 row g-0">
             <div className="col-12">
-              <Carousel autoplay interval={5000} loop slidesToShow={3} responsive={[{ breakpoint: 992, slidesToShow: 2 }, { breakpoint: 576, slidesToShow: 1 }]}>
+              <Carousel ref={carouselRef} autoplay interval={5000} loop slidesToShow={3} responsive={[{ breakpoint: 992, slidesToShow: 2 }, { breakpoint: 576, slidesToShow: 1 }]}>
                 {testimonials.map((t, i) => (
                   <div key={i} className="px-lg-3" style={{cursor: 'pointer'}} onClick={() => setActiveVideo(t.videoId)}>
                     <h3 className="fs45">{t.title}</h3>

@@ -154,7 +154,7 @@ export default function Header({ onConsultationOpen }) {
         onMouseLeave={handleMouseLeave}>
         <div id="main-menu" className="main-menu position-relative h-100">
           <div className="row g-0 h-100">
-            <div id="main-menu-sub" className="col-12 h-100">
+            <div id="main-menu-sub" className={`col-12 h-100${activeMenu ? ' open' : ''}`}>
               <div className="over row g-0 h-100">
                 <div id="treatments-body-submenu" className={`sub-menu col-4 offset-1${activeMenu === 'body' ? ' current' : ''}`}>
                   <div className="pt-lg-100">
@@ -234,7 +234,7 @@ export default function Header({ onConsultationOpen }) {
               </div>
               <div className="close-wrap pb-lg-40">
                 <button className="close close-sub" onClick={() => setActiveMenu(null)}>
-                  <i className="fa-solid fa-xmark fs75 d-block"></i>
+                  <i className="fa-thin fa-xmark fs75 d-block"></i>
                   <span>Close</span>
                 </button>
               </div>

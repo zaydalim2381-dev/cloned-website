@@ -1,7 +1,7 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useCallback, forwardRef, useImperativeHandle } from 'react';
 import useCarousel from '../hooks/useCarousel';
 
-export default function Carousel({
+const Carousel = forwardRef(function Carousel({
   children,
   slidesToShow = 1,
   autoplay = true,
@@ -12,7 +12,7 @@ export default function Carousel({
   className = '',
   style,
   responsive,
-}) {
+}, ref) {
   const items = Array.isArray(children) ? children : [children];
   const totalSlides = items.length;
   const containerRef = useRef(null);
@@ -37,6 +37,8 @@ export default function Carousel({
     window.addEventListener('resize', handle);
     return () => { window.removeEventListener('resize', handle); clearTimeout(timer); };
   }, [effective]);
+
+  useImperativeHandle(ref, () => ({ next, prev, goTo, pause, resume }), [next, prev, goTo, pause, resume]);
 
   if (totalSlides === 0) return null;
 
@@ -114,4 +116,6 @@ export default function Carousel({
       )}
     </div>
   );
-}
+});
+
+export default Carousel;

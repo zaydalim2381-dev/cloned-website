@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <header id="hero" className="position-relative d-flex watermark watermark-br">
-      <div className="over row g-0 w-100 my-auto">
+    <header id="hero" className="position-relative d-flex over watermark watermark-br">
+      <div className="over row g-0 w-100 my-auto animate fadeIn">
         <div className="col-10 offset-1 col-lg-8 col-xxl-6 pt-100 pt-lg-60">
           <div className="">
             <h2 className="subtitle mb-0">Meet your</h2>

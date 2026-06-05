@@ -5,7 +5,7 @@ export default function LatestPosts() {
   const posts = blogPosts.slice(0, 3);
 
   return (
-    <section id="latest-posts" className="py-60 py-lg-120 watermark watermark-grey position-relative">
+    <section id="latest-posts" className="over py-60 py-lg-120 watermark watermark-grey position-relative">
       <header className="over row g-0 animate fadeIn">
         <div className="col-10 offset-1 col-lg-6">
           <h3 className="subtitle mb-0">Our Recent</h3>
