@@ -1,42 +1,93 @@
-import PageHero from '../components/PageHero';
-import MediaSection from '../components/MediaSection';
+const pressItems = [
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2023/10/logo-khaleej-times.png',
+    publication: 'Khaleej Times',
+    title: 'Answering the demand for plastic surgeons among men',
+    link: 'https://www.khaleejtimes.com/kt-network/answering-the-demand-for-plastic-surgeons-among-men',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2023/10/logo-woman.png',
+    publication: 'Emirates Woman',
+    title: 'Everything you need to know about getting a mommy makeover',
+    link: 'https://emirateswoman.com/everything-you-need-to-know-about-getting-a-mommy-makeover/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2023/10/logo-hayati.png',
+    publication: 'Hayati Magazine',
+    title: 'The God of Plastic Surgery in Dubai - How Dr Adnan Became One of the Best Surgeons in the World',
+    link: 'https://www.hayatimagazine.com/the-god-of-plastic-surgery-in-dubai-how-dr-adnan-became-one-of-the-best-surgeons-in-the-world/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2023/10/logo-vogue.png',
+    publication: 'VOGUE',
+    title: 'Best Plastic Surgeons In Dubai',
+    link: 'https://www.vogue.com/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2024/06/Elle-1.png',
+    publication: 'Elle Hollywood',
+    title: 'Dr. Adnan Tahir: The Best Celebrity Plastic Surgeon in Dubai',
+    link: 'https://www.elle.com/hollywood/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2024/06/Cos-1.png',
+    publication: 'Cosmopolitan',
+    title: '10 Celebrity Plastic Surgeons in Dubai',
+    link: 'https://www.cosmopolitan.com/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2024/06/Spe.png',
+    publication: "Spear's 500",
+    title: 'Dr Adnan named in Spear\'s 500',
+    link: 'https://www.spearswms.com/',
+  },
+  {
+    logo: 'https://adnan-tahir.com/wp-content/uploads/2023/10/logo-dubais-best.png',
+    publication: "Dubai's Best",
+    title: 'Best Plastic Surgeon in Dubai',
+    link: 'https://adnan-tahir.com/',
+  },
+];
 
 export default function MediaPage() {
-  const mediaMentions = [
-    { publication: 'Dubai\'s Best', title: 'Best Rhinoplasty Clinic in Dubai', url: 'https://www.dubaisbest.com/best-rhinoplasty-dubai/' },
-    { publication: 'Khaleej Times', title: 'Dubai residents undergo cosmetic surgery for dimples', url: 'https://www.khaleejtimes.com/uae/dubai-residents-undergo-cosmetic-surgery-for-dimples' },
-    { publication: 'Emirates Woman', title: 'Post-lockdown: Are you preparing yourself for life part two?', url: 'https://emirateswoman.com/cosmetic-procedures-dubai/' },
-    { publication: 'VOGUE Arabia', title: 'Why The Non-surgical Nose Job Is A Trend You Should Know About', url: 'https://en.vogue.me/beauty/nose-jobs/' },
-    { publication: 'Cosmopolitan UAE', title: 'The inspiring journey and vision of Dr Adnan Tahir', url: 'https://cosmopolitanuae.com/feature/the-inspiring-journey-and-vision-of-dr-adnan-tahir/' },
-    { publication: 'ELLE Hollywood', title: 'Featured Article', url: 'https://ellehollywood.com/?p=1939' },
-    { publication: 'Spear\'s 500', title: 'Adnan Tahir — Spear\'s 500 Adviser', url: 'https://www.spears500.com/adviser/15620/adnan-tahir' },
-  ];
-
   return (
-      <main id="main" className="site-main">
-        <PageHero
-          title="Press & Media — Dr Adnan Tahir in the News"
-          subtitle="Dr Adnan"
-          bgImage="https://adnan-tahir.com/wp-content/uploads/2023/10/home-banner.jpg"
-        />
-        <MediaSection />
-        <section className="py-60">
-          <div className="row g-0">
-            <div className="col-10 offset-1">
-              <h2 className="fs100" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)' }}>Media Mentions</h2>
-              <div style={{ marginTop: '30px', display: 'grid', gap: '24px' }}>
-                {mediaMentions.map((m, i) => (
-                  <div key={i} style={{ borderBottom: '1px solid #eee', paddingBottom: '20px' }}>
-                    <p style={{ fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999', marginBottom: '4px' }}>{m.publication}</p>
-                    <a href={m.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontFamily: 'Playfair Display, serif', textDecoration: 'none', color: '#1a1a1a' }}>
-                      {m.title}
-                    </a>
+    <main id="main" className="site-main">
+      <header id="hero" className="position-relative d-flex watermark watermark-br">
+        <div className="over row g-0 w-100 my-auto">
+          <div className="col-10 offset-1 col-lg-8 col-xxl-6 pt-100 pt-lg-60">
+            <div>
+              <h2 className="subtitle mb-0">Press & Media</h2>
+            </div>
+          </div>
+        </div>
+        <div className="bg-img">
+          <img width="520" height="400" src="https://adnan-tahir.com/wp-content/uploads/2023/12/AT-Press-and-Media-header-mob.jpg" className="d-lg-none cover-fit" alt="Press & Media" />
+          <img width="1440" height="480" src="https://adnan-tahir.com/wp-content/uploads/2023/12/AT-Press-and-Media-header.jpg" className="d-none d-lg-block cover-fit" alt="Press & Media" />
+        </div>
+      </header>
+
+      <div id="main-content" className="grad-white-to-grey pt-60 pb-lg-100">
+        <section className="row g-0 pb-30">
+          <div className="col-10 offset-1">
+            <div className="row g-0">
+              {pressItems.map((item, i) => (
+                <div key={i} className="col-12 col-lg-6 pb-40 animate fadeIn">
+                  <div className="row g-0">
+                    <div className="col-4 col-lg-3">
+                      <img width="300" height="180" src={item.logo} alt={item.publication} loading="lazy" style={{maxWidth:'100%', height:'auto'}} />
+                    </div>
+                    <div className="col-8 col-lg-9 ps-3">
+                      <p className="mb-0" style={{fontSize:'0.8rem', opacity:0.7, textTransform:'uppercase', letterSpacing:'0.1em'}}>{item.publication}</p>
+                      <p className="fw-bold" style={{fontSize:'1.1rem'}}>{item.title}</p>
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="btn btn-solid btn-sm">Read more</a>
+                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
-      </main>
+      </div>
+    </main>
   );
 }
