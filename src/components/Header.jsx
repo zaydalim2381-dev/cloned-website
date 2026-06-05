@@ -108,6 +108,7 @@ export default function Header({ onConsultationOpen }) {
                   <button
                     className={`hamburger hamburger--stand${mobileOpen ? ' is-active' : ''}`}
                     type="button"
+                    data-target="#mobile-menu"
                     aria-controls="main-menu"
                     aria-expanded={mobileOpen}
                     aria-label="Toggle navigation"
