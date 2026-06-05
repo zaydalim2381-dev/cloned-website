@@ -75,7 +75,14 @@
 .slick-arrow{background:0;border:0;cursor:pointer}
 .slick-arrow.slick-disabled{opacity:.3;cursor:default}
 
-/* Override theme position:absolute on arrows - our Carousel puts arrows inline in grid */
-.carousel-slider .slick-arrow{position:static;top:auto;transform:none;color:#1a1a1a;font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;height:auto;width:auto;margin:auto}
-.carousel-slider .slick-arrow.slick-prev{background-image:none}
-.carousel-slider .slick-arrow.slick-next{background-image:none}
+/* Override theme position:absolute on arrows - all our arrows are inline in Bootstrap grid */
+.carousel-slider .slick-arrow,
+.slick-arrow.case-prev,.slick-arrow.case-next,
+.slick-arrow.testimonials-prev,.slick-arrow.testimonials-next,
+.slick-arrow.about-arrow{position:static;top:auto;transform:none;color:#1a1a1a;font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;height:auto;width:auto;margin:auto}
+.slick-arrow.case-prev,.slick-arrow.testimonials-prev,
+.carousel-slider .slick-arrow.slick-prev,
+.slick-arrow.about-arrow.slick-prev{background-image:none}
+.slick-arrow.case-next,.slick-arrow.testimonials-next,
+.carousel-slider .slick-arrow.slick-next,
+.slick-arrow.about-arrow.slick-next{background-image:none}

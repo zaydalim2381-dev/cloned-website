@@ -99,19 +99,19 @@ export default function AboutPage() {
         </header>
         <div className="section-inner-sm row g-0 animate fadeIn">
           <div className="col-1 d-flex">
-            <button className="slick-arrow slick-prev">Previous</button>
-          </div>
-          <div className="col-10">
-            <div className="carousel" style={{display:'flex', gap:'30px', overflow:'hidden', padding:'10px 0'}}>
-              {qualifications.map((img, i) => (
-                <div key={i} style={{flex:'0 0 180px'}}>
-                  <img width="300" height="180" src={img} alt={`Qualification ${i + 1}`} loading="lazy" style={{maxWidth:'100%', height:'auto'}} />
+            <button className="slick-arrow about-arrow slick-prev">Previous</button>
+              </div>
+              <div className="col-10">
+                <div className="carousel" style={{display:'flex', gap:'30px', overflow:'hidden', padding:'10px 0'}}>
+                  {qualifications.map((img, i) => (
+                    <div key={i} style={{flex:'0 0 180px'}}>
+                      <img width="300" height="180" src={img} alt={`Qualification ${i + 1}`} loading="lazy" style={{maxWidth:'100%', height:'auto'}} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="col-1 d-flex">
-            <button className="slick-arrow slick-next">Next</button>
+              </div>
+              <div className="col-1 d-flex">
+                <button className="slick-arrow about-arrow slick-next">Next</button>
           </div>
         </div>
       </section>
@@ -152,7 +152,7 @@ export default function AboutPage() {
               <div className="col-12 col-lg-6 offset-lg-1 pt-40 pt-lg-0 animate fadeIn">
                 <div className="section-inner-sm row g-0" style={{alignItems:'center'}}>
                   <div className="col-1 d-flex">
-                    <button className="slick-arrow slick-prev">Previous</button>
+                    <button className="slick-arrow about-arrow slick-prev">Previous</button>
                   </div>
                   <div className="col-10">
                     <div className="carousel" style={{display:'flex', gap:'20px', overflow:'hidden', padding:'10px 0'}}>
@@ -164,7 +164,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="col-1 d-flex">
-                    <button className="slick-arrow slick-next">Next</button>
+                    <button className="slick-arrow about-arrow slick-next">Next</button>
                   </div>
                 </div>
                 <div className="pt-30">
