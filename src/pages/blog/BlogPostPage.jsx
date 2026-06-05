@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { getPost } from '../../data/blogPosts';
+import { getBlogContent } from '../../data/blogContent';
 import GoogleReviews from '../../components/GoogleReviews';
 
 function formatDate(dateStr) {
@@ -13,6 +14,7 @@ function formatDate(dateStr) {
 export default function BlogPostPage() {
   const { slug } = useParams();
   const post = getPost(slug);
+  const content = getBlogContent(slug);
 
   if (!post) {
     return (
@@ -30,6 +32,17 @@ export default function BlogPostPage() {
   const catSlug = post.category.toLowerCase().replace(/\s+/g, '-');
   const url = window.location.href;
   const shareText = encodeURIComponent(post.title);
+
+  const sections = content?.sections || [
+    {
+      heading: null,
+      paragraphs: [
+        `This article explores ${post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.`,
+        'Dr. Adnan Tahir is one of the best plastic surgeons in Dubai, passionate about delivering quality outcomes in aesthetics. He believes in doing the minimum to achieve the desired outcome that is natural-looking and proportionate.',
+        `For a personalized consultation regarding ${post.category.toLowerCase()}, contact Dr. Adnan Tahir's clinic to discuss your options.`,
+      ],
+    },
+  ];
 
   return (
     <main id="main" className="site-main">
@@ -55,11 +68,13 @@ export default function BlogPostPage() {
                   <div className="col-11 offset-1 pt-20 d-lg-none animate fadeIn">
                     <img width="640" height="640" src={post.img} className="w-100" alt={post.title} loading="lazy" />
                   </div>
-                  <div className="section-inner-lg col-10 offset-1 col-lg-12 offset-lg-0 pt-20 pt-lg-40">
-                    <div className="text-content animate fadeIn">
-                      <p>This article explores {post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.</p>
+                  {sections[0] && (
+                    <div className="section-inner-lg col-10 offset-1 col-lg-12 offset-lg-0 pt-20 pt-lg-40">
+                      <div className="text-content animate fadeIn">
+                        <p>{sections[0].paragraphs[0]}</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </header>
             </div>
@@ -73,13 +88,20 @@ export default function BlogPostPage() {
       <div id="main-content" className="pt-lg-60 watermark watermark-bl watermark-grey pb-60 pb-lg-120">
         <div className="watermark watermark-tr watermark-grey">
           <div className="over row g-0 pb-40 pb-lg-60">
-            <div className="col-10 offset-1 col-lg-8 offset-lg-2 pt-60 pt-lg-100">
-              <div className="section-inner-lg text-content animate fadeIn">
-                <p>This article explores {post.title.toLowerCase()} and provides insights from Dr. Adnan Tahir, a UK-trained plastic surgeon practicing at CosmeSurge Hospital in Dubai.</p>
-                <p>Dr. Adnan Tahir is one of the best plastic surgeons in Dubai, passionate about delivering quality outcomes in aesthetics. He believes in doing the minimum to achieve the desired outcome that is natural-looking and proportionate.</p>
-                <p>For a personalized consultation regarding {post.category.toLowerCase()}, contact Dr. Adnan Tahir&apos;s clinic to discuss your options.</p>
+            {sections.map((section, i) => (
+              <div key={i} className="col-10 offset-1 col-lg-8 offset-lg-2 pt-60 pt-lg-100">
+                {section.heading && (
+                  <header className="animate fadeIn">
+                    <h2 className="fs75">{section.heading}</h2>
+                  </header>
+                )}
+                <div className={`section-inner-lg text-content${i === 0 ? ' first-up' : ''} animate fadeIn`}>
+                  {section.paragraphs.map((p, j) => (
+                    <p key={j}>{p}</p>
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
 
             <div className="col-10 offset-1 col-lg-8 offset-lg-2 pt-60 pt-lg-100">
               <header className="animate fadeIn">
